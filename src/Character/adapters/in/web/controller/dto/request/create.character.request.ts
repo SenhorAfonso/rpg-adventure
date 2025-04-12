@@ -1,26 +1,25 @@
-import { IsArray, IsEnum, IsInt, IsString } from "class-validator"
-import { Classes } from "src/Character/adapters/in/enums/classes";
+import { IsArray, IsEnum, IsInt, IsString } from 'class-validator';
+import { Classes } from 'src/Character/adapters/in/enums/classes';
 
 export class CreateCharacterRequest {
+  @IsString()
+  name: string;
 
-    @IsString()
-    name: string;
+  @IsString()
+  adventurerName: string;
 
-    @IsString()
-    aventurerName: string;
+  @IsEnum(Classes)
+  classe: Classes;
 
-    @IsEnum(Classes)
-    classe: Classes;
+  @IsInt()
+  level: number;
 
-    @IsInt()
-    level: number;
+  @IsArray()
+  magicItems: Array<string>;
 
-    @IsArray()
-    magicItens: Array<any>; // TODO: adicionar tipo especifico no array
+  @IsInt()
+  strength: number;
 
-    @IsInt()
-    strenght: number;
-
-    @IsInt()
-    defense: number;
+  @IsInt()
+  defense: number;
 }

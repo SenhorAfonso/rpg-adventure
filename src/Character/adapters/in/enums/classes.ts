@@ -1,7 +1,7 @@
 export enum Classes {
-    WARRIOR, 
-    MAGE,
-    ARCHER,
-    LADIN,
-    BARD
+  WARRIOR = 'WARRIOR',
+  MAGE = 'MAGE',
+  ARCHER = 'ARCHER',
+  LADIN = 'LADIN',
+  BARD = 'BARD',
 }
