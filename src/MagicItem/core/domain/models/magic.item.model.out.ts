@@ -5,8 +5,8 @@ export class MagicItemModelOut {
     public readonly id: string,
     public readonly name: string,
     public readonly itemType: ITEM_TYPE,
-    private readonly strength: number,
-    private readonly defense: number,
+    public readonly strength: number,
+    public readonly defense: number,
     public readonly owner: string,
   ) {}
 }

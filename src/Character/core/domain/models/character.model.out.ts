@@ -8,8 +8,8 @@ export class CharacterModelOut {
     private readonly adventurerName: string,
     private readonly classe: Classes,
     private readonly level: number,
-    private readonly strength: number,
-    private readonly defense: number,
+    private readonly strength: { [k: string]: number } | number,
+    private readonly defense: { [k: string]: number } | number,
     public readonly magicItems: MagicItemModelOut[] | string[],
   ) {}
 }

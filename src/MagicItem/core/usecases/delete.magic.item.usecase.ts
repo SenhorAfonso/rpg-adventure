@@ -13,7 +13,6 @@ export class DeleteMagicItemUseCase implements DeleteMagicItemInputPort {
   ) {}
 
   public async execute(itemId: string): Promise<void> {
-    console.log('caiu aqui');
     await this.removeMagicItemFromCharacterUsecase.execute(null, itemId);
     await this.magicItemPersistenceAdapter.delete(itemId);
   }

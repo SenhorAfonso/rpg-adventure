@@ -8,6 +8,6 @@ export interface MagicItemPersistenceOutputPort {
   getAll(): Promise<MagicItemModelOut[]>;
   delete(itemId: string): Promise<void>;
   getMagicItemsByCharacter(character: any): Promise<any>;
-
+  checkIfItemExists(itemName: string): Promise<boolean>;
   updateItemOwner(itemId: string[] | string, newOwner: string): Promise<void>;
 }

@@ -37,6 +37,15 @@ export class MagicItemPersistenceAdapter
     return this.magicItemMapper.MagicItemDocumentToModelOut(item);
   }
 
+  async checkIfItemExists(itemName: string): Promise<boolean> {
+    const item = await this.magicItemModel.findOne({ name: itemName });
+
+    if (!item) {
+      return false;
+    }
+    return true;
+  }
+
   async getByIdArray(itemId: string[]): Promise<MagicItemModelOut[]> {
     const items = await this.magicItemModel.find({ _id: { $in: itemId } });
     return this.magicItemMapper.MagicItemDocumentsArrayToModelOut(items);

@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { MagicItemPersistenceOutputPort } from '../ports/out/magic.item.persistence.output.port';
 import { MagicItemModelOut } from '../domain/models/magic.item.model.out';
 import { MagicItemModelIn } from '../domain/models/magic.item.model.in';
@@ -14,6 +14,15 @@ export class CreateMagicItemUseCase implements CreateMagicItemInputPort {
   public async execute(
     magicItemModelIn: MagicItemModelIn,
   ): Promise<MagicItemModelOut> {
+    const alreadyExist =
+      await this.magicItemPersistenceAdapter.checkIfItemExists(
+        magicItemModelIn.name,
+      );
+
+    if (alreadyExist) {
+      throw new BadRequestException('Magic item already exists');
+    }
+
     return this.magicItemPersistenceAdapter.save(magicItemModelIn);
   }
 }

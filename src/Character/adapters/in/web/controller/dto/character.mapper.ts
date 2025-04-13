@@ -23,14 +23,52 @@ export class CharacterMapper {
     document: CharacterDocument,
     items: MagicItemModelOut[],
   ): CharacterModelOut {
+    const weaponItems: [string, number][] = [];
+    const armorItems: [string, number][] = [];
+
+    const amulet = items.find((item) => item.itemType === 'AMULET');
+    const allWeapons = items.filter((item) => item.itemType === 'WEAPON');
+    const totalStrength =
+      document.strength +
+      allWeapons.reduce((acc, item) => {
+        return acc + item.strength;
+      }, 0) +
+      (amulet ? amulet.strength : 0);
+
+    const allArmors = items.filter((item) => item.itemType === 'ARMOR');
+    const totalDefense =
+      document.defense +
+      allArmors.reduce((acc, item) => {
+        return acc + item.defense;
+      }, 0) +
+      (amulet ? amulet.defense : 0);
+
+    weaponItems.push(['totalStrength', totalStrength]);
+    armorItems.push(['totalDefense', totalDefense]);
+    weaponItems.push(['natural', document.strength]);
+    armorItems.push(['natural', document.defense]);
+
+    allWeapons.forEach((weapon) => {
+      weaponItems.push([weapon.name, weapon.strength]);
+    });
+
+    allArmors.forEach((armor) => {
+      armorItems.push([armor.name, armor.defense]);
+    });
+
+    weaponItems.push([amulet.name, amulet.strength]);
+    armorItems.push([amulet.name, amulet.strength]);
+    const weaponsObject = Object.fromEntries(weaponItems);
+    const armorsObject = Object.fromEntries(armorItems);
+
     return new CharacterModelOut(
       document.id,
       document.name,
       document.adventurerName,
       document.classe,
       document.level,
-      document.strength,
-      document.defense,
+      weaponsObject,
+      armorsObject,
       items,
     );
   }
