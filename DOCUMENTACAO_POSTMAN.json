@@ -1,0 +1,325 @@
+{
+	"info": {
+		"_postman_id": "4af5438b-f123-4469-93ed-ce78c4f11461",
+		"name": "prova",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44011031",
+		"_collection_link": "https://pedrosena-7406018.postman.co/workspace/Pedro-Sena's-Workspace~170fd73e-d48f-44be-8125-91e7281764b4/collection/44011031-4af5438b-f123-4469-93ed-ce78c4f11461?action=share&source=collection_link&creator=44011031"
+	},
+	"item": [
+		{
+			"name": "characters",
+			"item": [
+				{
+					"name": "CREATE CHARACTER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Pedro Senaw\",\r\n    \"adventurerName\": \"sirafonso\",\r\n    \"classe\": \"WARRIOR\",\r\n    \"level\": 1,\r\n    \"magicItems\": [\r\n        // MAGIC ITEM ID\r\n    ],\r\n    \"strength\": 1,\r\n    \"defense\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/character",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"character"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL CHARACTERS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/character",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"character"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET CHARACTER BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/character/<CHARACTER_ID>",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"character",
+								"<CHARACTER_ID>"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE CHARACTER BY ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/character/<CHARACTER_ID>",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"character",
+								"<CHARACTER_ID>"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE CHARACTER ADVENTURER NAME",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"adventurerName\": // NEW NAME",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/character/<CHARACTER_ID>",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"character",
+								"<CHARACTER_ID>"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD MAGIC ITEM TO CHARACTER",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/character/<CHARACTER_ID>/<MAGIC_ITEM_ID>",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"character",
+								"<CHARACTER_ID>",
+								"<MAGIC_ITEM_ID>"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "REMOVE MAGIC ITEM FROM CHARACTER",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/character/<CHARACTER_ID>/<MAGIC_ITEM_ID>",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"character",
+								"<CHARACTER_ID>",
+								"<MAGIC_ITEM_ID>"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET CHARACTER AMULET",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/character/<CHARACTER_ID>/amulet",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"character",
+								"<CHARACTER_ID>",
+								"amulet"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "magic item",
+			"item": [
+				{
+					"name": "CREATE MAGIC ITEM",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"adaga\",\r\n    \"itemType\": \"AMULET\",\r\n    \"strength\": 4,\r\n    \"defense\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/item",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL MAGIC ITEMS",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/item",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET MAGIC ITEM BY ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/item/<MAGIC_ITEM_ID>",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"item",
+								"<MAGIC_ITEM_ID>"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET MAGIC ITEMS BY CHARACTER",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/item/character/<CHARACTER_ID>",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"item",
+								"character",
+								"<CHARACTER_ID>"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE MAGIC ITEM",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/item/<MAGIC_ITEM_ID>",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"item",
+								"<MAGIC_ITEM_ID>"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
