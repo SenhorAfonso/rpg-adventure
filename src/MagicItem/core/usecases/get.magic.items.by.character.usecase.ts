@@ -9,7 +9,7 @@ export class GetMagicItemsByCharacterUsecase
   public constructor(
     @Inject('MagicItemPersistenceOutputPort')
     private readonly magicItemPersistenceAdapter: MagicItemPersistenceOutputPort,
-  ) { }
+  ) {}
 
   execute(characterId: string): Promise<void> {
     return this.magicItemPersistenceAdapter.getMagicItemsByCharacter(

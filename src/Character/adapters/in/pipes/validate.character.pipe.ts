@@ -13,7 +13,7 @@ export class ValidateCharacterPipe implements PipeTransform {
   constructor(
     @Inject('MagicItemPersistenceOutputPort')
     private readonly magicItemPersistenceAdapter: MagicItemPersistenceOutputPort,
-  ) { }
+  ) {}
 
   async transform(
     character: CreateCharacterRequest,

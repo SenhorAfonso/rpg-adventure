@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Injectable,
@@ -55,5 +56,10 @@ export class MagicItemController {
   @Get('/character/:id')
   public getMagicItemsByCharacter(@Param('id') id: string) {
     return this.getMagicItemsByCharacterUsecase.execute(id);
+  }
+
+  @Delete('/:id')
+  public deleteItem(@Param('id') id: string) {
+    return this.deleteMagicItemUsecase.execute(id);
   }
 }

@@ -1,10 +1,11 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CharacterPersistenceOutputPort } from '../ports/out/character.persistence.output.port';
 import { MagicItemPersistenceOutputPort } from 'src/MagicItem/core/ports/out/magic.item.persistence.output.port';
-import { RemoveMagicItemFromCharacterInputPort } from '../ports/in/remove.magic.item.to.character.input.port';
+import { RemoveMagicItemFromCharacterInputPort } from '../ports/in/remove.magic.item.from.character.input.port';
+import { MagicItemModelOut } from 'src/MagicItem/core/domain/models/magic.item.model.out';
 
 @Injectable()
-export class RemoveMagicItemToCharacterUsecase
+export class RemoveMagicItemFromCharacterUsecase
   implements RemoveMagicItemFromCharacterInputPort
 {
   constructor(
@@ -15,6 +16,10 @@ export class RemoveMagicItemToCharacterUsecase
   ) {}
 
   async execute(characterId: string, magicItemId: string): Promise<void> {
+    if (!characterId) {
+      return this.removeMagicItemFromAllCharacters(magicItemId);
+    }
+
     const character =
       await this.characterPersistenceAdapter.getCharacterById(characterId);
 
@@ -31,15 +36,27 @@ export class RemoveMagicItemToCharacterUsecase
       );
     }
 
-    if (magicItem.owner) {
-      throw new NotFoundException(
-        `Magic item with id ${magicItemId} already has an owner`,
-      );
-    }
-
     await this.characterPersistenceAdapter.removeCharacterMagicItem(
       characterId,
       magicItemId,
     );
+  }
+
+  private async removeMagicItemFromAllCharacters(itemId: string) {
+    const allCharacters =
+      await this.characterPersistenceAdapter.getAllCharacters();
+
+    allCharacters.forEach((character) => {
+      Promise.all(
+        character.magicItems.map(async (item: MagicItemModelOut | string) => {
+          if (item === itemId) {
+            await this.characterPersistenceAdapter.removeCharacterMagicItem(
+              character.id,
+              item,
+            );
+          }
+        }),
+      );
+    });
   }
 }

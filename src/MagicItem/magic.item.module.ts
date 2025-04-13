@@ -9,14 +9,20 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { MagicItemSchema } from './adapters/out/persistence/models/magic.item.model';
 import { MagicItemMapper } from './adapters/in/web/controller/dto/magic.item.mapper';
 import { GetMagicItemsByCharacterUsecase } from './core/usecases/get.magic.items.by.character.usecase';
+import { RemoveMagicItemFromCharacterUsecase } from 'src/Character/core/usecases/remove.magic.item.from.character.usecase';
+import { CharacterPersistenceAdapter } from 'src/Character/adapters/out/persistence/character.persistence.adapter';
+import { CharacterSchema } from 'src/Character/adapters/out/persistence/models/character.model';
+import { CharacterMapper } from 'src/Character/adapters/in/web/controller/dto/character.mapper';
 
 @Module({
   controllers: [MagicItemController],
   imports: [
     MongooseModule.forFeature([{ name: 'MagicItem', schema: MagicItemSchema }]),
+    MongooseModule.forFeature([{ name: 'Character', schema: CharacterSchema }]),
   ],
   providers: [
     MagicItemMapper,
+    CharacterMapper,
     {
       provide: 'MagicItemPersistenceOutputPort',
       useClass: MagicItemPersistenceAdapter,
@@ -40,6 +46,14 @@ import { GetMagicItemsByCharacterUsecase } from './core/usecases/get.magic.items
     {
       provide: 'GetMagicItemsByCharacterInputPort',
       useClass: GetMagicItemsByCharacterUsecase,
+    },
+    {
+      provide: 'RemoveMagicItemFromCharacterInputPort',
+      useClass: RemoveMagicItemFromCharacterUsecase,
+    },
+    {
+      provide: 'CharacterPersistenceOutputPort',
+      useClass: CharacterPersistenceAdapter,
     },
   ],
   exports: [

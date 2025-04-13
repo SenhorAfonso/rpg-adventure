@@ -36,6 +36,11 @@ export class CharacterPersistenceAdapter
     await this.characterModel.findByIdAndUpdate(characterId, {
       $push: { magicItems: magicItemId },
     });
+
+    await this.magicItemPersistenceAdapter.updateItemOwner(
+      magicItemId,
+      characterId,
+    );
   }
 
   async deleteCharacter(characterId: any): Promise<void> {
@@ -80,6 +85,7 @@ export class CharacterPersistenceAdapter
     await this.characterModel.findByIdAndUpdate(characterId, {
       $pull: { magicItems: magicItemId },
     });
+    await this.magicItemPersistenceAdapter.updateItemOwner(magicItemId, null);
   }
 
   async getCharacterById(characterId: string): Promise<CharacterModelOut> {

@@ -11,7 +11,7 @@ import { GetCharacterByIdUsecase } from './core/usecases/get.character.by.id.use
 import { UpdateAdventurerNameUsecase } from './core/usecases/update.adventurer.name.usecase';
 import { DeleteCharacterByIdUseCase } from './core/usecases/delete.character.by.id.usecase';
 import { AddMagicItemToCharacterUsecase } from './core/usecases/add.magic.item.to.character.usecase';
-import { RemoveMagicItemToCharacterUsecase } from './core/usecases/remove.magic.item.to.character.usecase';
+import { RemoveMagicItemFromCharacterUsecase } from './core/usecases/remove.magic.item.from.character.usecase';
 import { GetCharacterAmuleteUsecase } from './core/usecases/get.character.amulet.usecase';
 
 @Module({
@@ -52,11 +52,17 @@ import { GetCharacterAmuleteUsecase } from './core/usecases/get.character.amulet
     },
     {
       provide: 'RemoveMagicItemFromCharacterInputPort',
-      useClass: RemoveMagicItemToCharacterUsecase,
+      useClass: RemoveMagicItemFromCharacterUsecase,
     },
     {
       provide: 'GetCharacterAmuletInputPort',
       useClass: GetCharacterAmuleteUsecase,
+    },
+  ],
+  exports: [
+    {
+      provide: 'CharacterPersistenceOutputPort',
+      useClass: CharacterPersistenceAdapter,
     },
   ],
 })

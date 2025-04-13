@@ -19,7 +19,7 @@ import { GetCharacterByIdInputPort } from 'src/Character/core/ports/in/get.chara
 import { UpdateAdventurerNameInputPort } from 'src/Character/core/ports/in/update.character.adventurename.input.port';
 import { DeleteCharacterByIdInputPort } from 'src/Character/core/ports/in/delete.character.by.id.input.port';
 import { AddMagicItemToCharacterInputPort } from 'src/Character/core/ports/in/add.magic.item.to.character.input.port';
-import { RemoveMagicItemFromCharacterInputPort } from 'src/Character/core/ports/in/remove.magic.item.to.character.input.port';
+import { RemoveMagicItemFromCharacterInputPort } from 'src/Character/core/ports/in/remove.magic.item.from.character.input.port';
 import { GetCharacterAmuletInputPort } from 'src/Character/core/ports/in/get.character.amulet.input.port';
 
 @Injectable()
@@ -50,7 +50,7 @@ export class CharacterController {
     @Inject('GetCharacterAmuletInputPort')
     private readonly getCharacterAmuletUsecase: GetCharacterAmuletInputPort,
     private readonly characterMapper: CharacterMapper,
-  ) { }
+  ) {}
 
   @Post()
   @UsePipes(ValidateCharacterPipe)

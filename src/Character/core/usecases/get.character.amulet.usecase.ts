@@ -11,7 +11,7 @@ export class GetCharacterAmuleteUsecase implements GetCharacterAmuletInputPort {
     private readonly magicItemPersistenceOutputPort: MagicItemPersistenceOutputPort,
     @Inject('CharacterPersistenceOutputPort')
     private readonly characterPersistenceOutputPort: CharacterPersistenceOutputPort,
-  ) { }
+  ) {}
 
   async execute(characterId: string): Promise<MagicItemModelOut> {
     const character =

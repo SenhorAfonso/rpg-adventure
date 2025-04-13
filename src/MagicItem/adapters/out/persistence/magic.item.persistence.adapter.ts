@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { MagicItemModelIn } from 'src/MagicItem/core/domain/models/magic.item.model.in';
 import { MagicItemPersistenceOutputPort } from 'src/MagicItem/core/ports/out/magic.item.persistence.output.port';
@@ -29,6 +29,11 @@ export class MagicItemPersistenceAdapter
 
   async getById(itemId: string): Promise<MagicItemModelOut> {
     const item = await this.magicItemModel.findById(itemId);
+
+    if (!item) {
+      throw new NotFoundException(`Magic item with id ${itemId} not found`);
+    }
+
     return this.magicItemMapper.MagicItemDocumentToModelOut(item);
   }
 
@@ -50,7 +55,7 @@ export class MagicItemPersistenceAdapter
 
   async updateItemOwner(
     itemId: string[] | string,
-    newOwner: string,
+    newOwner: string | null,
   ): Promise<void> {
     if (Array.isArray(itemId)) {
       await this.magicItemModel.updateMany(
